@@ -1,0 +1,26 @@
+<div id="credentials">
+  <h3>GitHub credentials</h3>
+  <input type="text" name="username" ng-model="username" placeholder="username">
+  <input type="password" name="password" ng-model="password" placeholder="password">
+  <button ng-click="loadIssues()">Login</button>
+</div>
+
+<div id="issues">
+  <h1>GitHub issues for repo:</h1>
+  <ul>
+    <li ng-repeat="issue in issues">
+      <input type="checkbox" ng-model="issue.state" ng-true-value="closed" ng-false-value="open" ng-click="closeIssue(issue)">
+      <div class="title" ng-bind="issue.title"></div>
+      <div class="body" ng-bind="issue.body"></div>
+    </li>
+  </ul>
+</div>
+
+<div id="new-issue">
+  <h3>New issue</h3>
+  <input id="title" type="text" placeholder="Title" ng-model="title">
+  <textarea id="body" placeholder="Body" ng-model="body"></textarea>
+  <div class="clearfix">
+    <button ng-click="addIssue()">Add issue</button>
+  </div>
+</div>
