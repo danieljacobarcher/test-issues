@@ -5,7 +5,7 @@ angular.module('angularIssuesApp')
     $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.username + ':' + $scope.password);
 
     // Setup
-    var Issue = $resource('https://api.github.com/repos/danieljacobarcher/test_pages/issues/:number', {number: '@number'});
+    var Issue = $resource('https://api.github.com/repos/danieljacobarcher/test-issues/issues/:number', {number: '@number'});
 
 
     $scope.loadIssues = function() {
@@ -21,16 +21,13 @@ angular.module('angularIssuesApp')
         body: $scope.body
       };
 
-      $http.post('https://api.github.com/repos/danieljacobarcher/test_pages/issues', data).success(function(response) {
+      $http.post('https://api.github.com/repos/danieljacobarcher/test-issues/issues', data).success(function(response) {
         $scope.issues.unshift(data);
       });
     };
 
     $scope.closeIssue = function(issue) {
-      $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.username + ':' + $scope.password);
-      $http.post(issue.url, issue).success(function(response) {
-
-      });
+      issue.$save();
     };
 
 
